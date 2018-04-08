@@ -309,10 +309,19 @@ textarea {
     height: 400px;
 }
 
+#tagsCanvas {
+    width: 50%;
+}
+
+
 @media only screen and (max-width: 800px) {
     #mapsCanvas {
         width: 325px;
         height: 325px;
+    }
+
+    #tagsCanvas {
+        width: 45%;
     }
 }
 
@@ -321,6 +330,10 @@ textarea {
         width: 200px;
         height: 200px;
     }
+
+    #tagsCanvas {
+        width: 41%;
+    }
 }
 
 @media only screen and (max-width: 400px) {
@@ -328,4 +341,7 @@ textarea {
         width: 200px;
         height: 200px;
     }
-}
+
+    #tagsCanvas {
+        width: 35%;
+    }
