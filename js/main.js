@@ -10,6 +10,13 @@ $(document).on('click', 'tr', function() {
     centerMap(markers[$(this).attr('id')].position);
 });
 
+$("#loginSubmit").click(function() {
+    email = $("#email").val();
+    password = $("#password").val();
+
+    login(email, password);
+});
+
 /* Initalize Firebase */
 
 function initFirebase() {
@@ -21,6 +28,46 @@ function initFirebase() {
     };
 
     firebase.initializeApp(config);
+
+    var user = firebase.auth().currentUser;
+
+    if (user) {
+        $('.anonymous').hide();
+        $('.admin').show();
+    } else {
+        $('.admin').hide();
+        $('.anonymous').show();
+    }
+}
+
+function login(email, password) {
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+
+        console.log(errorCode);
+        console.log(errorMessage);
+    });
+    
+    /* Logged in */
+
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            $('.anonymous').hide();            
+            $('.admin').show();
+        } else {
+            $('.admin').hide();
+            $('.anonymous').show();
+        }
+    });
+}
+
+function logout() {
+    firebase.auth().signOut().then(function(){
+    
+    }).catch(function(error) {
+        console.log(error);
+    });
 }
 
 /* Google Maps */

@@ -300,12 +300,20 @@ textarea {
 	margin-left: 3%;
 }
 
+.right {
+    margin-right: 1%;
+}
+
 .top {
     margin-top: 3%;
 }
 
 .no-pad {
     padding: 0;
+}
+
+.float-right {
+    margin-left: auto; 
 }
 
 #mapsCanvas {
