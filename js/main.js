@@ -18,6 +18,24 @@ $("#loginSubmit").click(function() {
     login(email, password);
 });
 
+$("#searchTerm").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    
+    $("tr").each(function(index) {
+        if (index != 0) {
+            $row = $(this);
+
+            var id = $row.find("td").text().toLowerCase();  
+  
+            if (id.indexOf(value) != 0) {
+                $(this).hide()
+            } else {
+                $(this).show()        
+            }
+        }
+    });
+});
+
 /* Initalize Firebase */
 
 function initFirebase() {
