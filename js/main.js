@@ -32,16 +32,18 @@ function initMap() {
 		center: eugene,
 	});
 
-    addMarker(eugene);
+    addMarker(eugene, "Hometown");
 }
 
-function addMarker(loc, style) {
+function addMarker(loc, title) {
     var marker = new google.maps.Marker({
         position: loc,
         map: map,
+        title: title,
+        animation: google.maps.Animation.DROP,
     }); 
 
-    console.log("[*] Added marker @ " + loc.lat + " : " + loc.lng); 
+    console.log("[*] Added marker " + title + " @ " + loc.lat + " : " + loc.lng); 
 }
 
 /* Firebase Database */
@@ -52,15 +54,25 @@ function updateOrganizations() {
     orgsRef.once('value').then(function(snapshot) {
         var orgObj;
 
+        /* Object Format
+            lat, lng: The location of the organization or individual in computer friendly speak.
+            name: The name of the organization or individual.
+            desc: Description of the organization or individual.
+            location: The actual English location of the organization or individual.
+            type: The type, surgeons, therapists, doctors, endos. 
+        */
+
         for (var key in snapshot.val()) {
             orgObj = snapshot.val()[key];
 
-            loc = {
+            var loc = {
                 lat: orgObj.lat,
-                lng: orgObj.lng,
+                lng: orgObj.lng, 
             };
 
-            addMarker(loc);
+            var title = orgObj.name;
+
+            addMarker(loc, title);
         }
     });
 }
