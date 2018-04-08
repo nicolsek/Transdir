@@ -6,8 +6,8 @@ $(document).ready(function () {
     initMap();
 });
 
-$("tr").on("click", function() {
-    alert("Click!");
+$(document).on('click', 'tr', function() {
+    centerMap(markers[$(this).attr('id')].position);
 });
 
 /* Initalize Firebase */
@@ -57,16 +57,16 @@ function centerMap(loc) {
 
 /* Firebase Database */
 
-function insertTableRow(name, type, loc) {
-    trStart = "<tr id='" + name + "'>";
-    thStart = "<th scope='row'>";
-    tdStart = "<td>";
+function insertTableRow(name, type, loc, location) {
+    var trStart = "<tr id='" + name + "'>";
+    var thStart = "<th scope='row'>";
+    var tdStart = "<td>";
 
-    trEnd = "</tr>";
-    thEnd = "</th>";
-    tdEnd = "</td>";
+    var trEnd = "</tr>";
+    var thEnd = "</th>";
+    var tdEnd = "</td>";
 
-    tableRow = trStart + tdStart + name + tdEnd + tdStart + type + tdEnd + tdStart + loc + tdEnd + trEnd;
+    var tableRow = trStart + tdStart + name + tdEnd + tdStart + type + tdEnd + tdStart + loc + tdEnd + trEnd;
 
     $("#transInfo").append(tableRow);
 }

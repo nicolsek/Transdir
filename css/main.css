@@ -292,6 +292,10 @@ textarea {
 
 /* PROJECT CSS */
 
+.small-left {
+    margin-left: 1%;
+}
+
 .left {
 	margin-left: 3%;
 }
@@ -313,6 +317,10 @@ textarea {
 
 #transInfo {
     width: 60%; 
+}
+
+#search {
+    width: 50%;
 }
 
 tr:hover {
