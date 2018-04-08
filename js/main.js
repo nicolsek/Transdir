@@ -1,7 +1,8 @@
 /* jQuery Stuffs */
 
 $(document).ready(function () {
-    initFirebase(); 
+    initFirebase();
+    checkUser();
     updateOrganizations();
     initMap();
 });
@@ -28,7 +29,9 @@ function initFirebase() {
     };
 
     firebase.initializeApp(config);
+}
 
+function checkUser() {
     var user = firebase.auth().currentUser;
 
     if (user) {
@@ -38,6 +41,8 @@ function initFirebase() {
         $('.admin').hide();
         $('.anonymous').show();
     }
+
+    console.log(user);
 }
 
 function login(email, password) {
@@ -55,6 +60,7 @@ function login(email, password) {
         if (user) {
             $('.anonymous').hide();            
             $('.admin').show();
+
         } else {
             $('.admin').hide();
             $('.anonymous').show();
@@ -142,11 +148,39 @@ function updateOrganizations() {
 
             var locEnglish = orgObj.location;
             var type = orgObj.type;
-            var title = orgObj.name;
+            var name = orgObj.name;
 
-            addMarker(loc, title);
+            addMarker(loc, name);
 
-            insertTableRow(title, type, locEnglish);
+            insertTableRow(name, type, locEnglish);
         }
     });
+}
+
+/* Admin Panel */
+
+function insertConfirm(name, desc, loc, type) {
+    
+}
+
+var confirmations = {} 
+
+function updateApprovals() {
+    var confirmationRef = firebase.database().ref('confirmations');
+
+    for (var key in snapshot.val()) {
+        var loc = {
+            lat: confirmRef.lat,
+            lng: confirmRef.lng,
+        }
+
+        var locEnglish = confirmationRef.location;
+        var type = confirmationRef.type;
+        var name = confirmationRef.name;
+        var desc = confirmationRef.description;
+
+        confirmations[name] = snapshot.val()
+
+        insertConfirm(name, desc, locEnglish, type);
+    }
 }

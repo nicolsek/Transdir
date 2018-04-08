@@ -323,6 +323,10 @@ textarea {
     border: 1px solid black;
 }
 
+.admin {
+    display: none;
+}
+
 #transInfo {
     width: 60%; 
 }
