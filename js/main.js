@@ -1,7 +1,13 @@
+/* jQuery Stuffs */
+
 $(document).ready(function () {
     initFirebase(); 
     updateOrganizations();
     initMap();
+});
+
+$("tr").on("click", function() {
+    alert("Click!");
 });
 
 /* Initalize Firebase */
@@ -20,19 +26,18 @@ function initFirebase() {
 /* Google Maps */
 
 var map;
+var markers = {}; /* Marker Lookup */
 
 function initMap() {
-	var eugene = {
-		lat: 44.050046,
-		lng: -123.094962,
+	var oregon = {
+		lat: 43.8041,
+		lng: -120.5542,
 	}; 
 
 	map = new google.maps.Map(document.getElementById('mapsCanvas'), {
 		zoom: 6,
-		center: eugene,
+		center: oregon,
 	});
-
-    addMarker(eugene, "Hometown");
 }
 
 function addMarker(loc, title) {
@@ -43,10 +48,28 @@ function addMarker(loc, title) {
         animation: google.maps.Animation.DROP,
     }); 
 
-    console.log("[*] Added marker " + title + " @ " + loc.lat + " : " + loc.lng); 
+    markers[title] = marker;
+}
+
+function centerMap(loc) {
+    map.panTo(loc);
 }
 
 /* Firebase Database */
+
+function insertTableRow(name, type, loc) {
+    trStart = "<tr id='" + name + "'>";
+    thStart = "<th scope='row'>";
+    tdStart = "<td>";
+
+    trEnd = "</tr>";
+    thEnd = "</th>";
+    tdEnd = "</td>";
+
+    tableRow = trStart + tdStart + name + tdEnd + tdStart + type + tdEnd + tdStart + loc + tdEnd + trEnd;
+
+    $("#transInfo").append(tableRow);
+}
 
 function updateOrganizations() {
     var orgsRef = firebase.database().ref('organizations');
@@ -70,9 +93,13 @@ function updateOrganizations() {
                 lng: orgObj.lng, 
             };
 
+            var locEnglish = orgObj.location;
+            var type = orgObj.type;
             var title = orgObj.name;
 
             addMarker(loc, title);
+
+            insertTableRow(title, type, locEnglish);
         }
     });
 }

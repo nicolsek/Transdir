@@ -307,12 +307,35 @@ textarea {
 #mapsCanvas {
     width: 400px;
     height: 400px;
+
+    border: 1px solid black;
 }
 
-#tagsCanvas {
-    width: 50%;
+#transInfo {
+    width: 60%; 
 }
 
+tr:hover {
+    background-color: #F5836F;
+}
+
+@media only screen and (max-width: 1200px) {
+    #transInfo {
+        width: 55%;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    #transInfo {
+        width: 53%;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    #transInfo {
+        width: 45%;
+    }
+}
 
 @media only screen and (max-width: 800px) {
     #mapsCanvas {
@@ -320,28 +343,23 @@ textarea {
         height: 325px;
     }
 
-    #tagsCanvas {
+    #transInfo {
         width: 45%;
     }
 }
 
 @media only screen and (max-width: 600px) {
-    #mapsCanvas {
-        width: 200px;
-        height: 200px;
-    }
-
-    #tagsCanvas {
+    #transInfo {
         width: 41%;
     }
 }
 
 @media only screen and (max-width: 400px) {
     #mapsCanvas {
-        width: 200px;
-        height: 200px;
+        width: 250px;
+        height: 250px;
     }
 
-    #tagsCanvas {
+    #transInfo {
         width: 35%;
     }
