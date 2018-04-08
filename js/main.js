@@ -26,3 +26,16 @@ function initMap() {
 		center: eugene,
 	});
 }
+
+updateOrganizations();
+
+function updateOrganizations() {
+    var orgsRef = firebase.database().ref('organizations');
+
+    orgsRef.once('value').then(function(snapshot) {
+        for (var key in snapshot.val()) {
+            console.log(key);
+            console.log(snapshot.val()[key]);
+        }
+    });
+}
