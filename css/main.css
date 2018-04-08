@@ -293,15 +293,39 @@ textarea {
 /* PROJECT CSS */
 
 .left {
-	margin-left: 5%;
-	padding-left: 0%;
+	margin-left: 3%;
 }
 
-.margin-top {
-	margin-top: 3%;		
+.top {
+    margin-top: 3%;
+}
+
+.no-pad {
+    padding: 0;
 }
 
 #mapsCanvas {
-	width: 400px;
-	height: 400px;
+    width: 400px;
+    height: 400px;
+}
+
+@media only screen and (max-width: 800px) {
+    #mapsCanvas {
+        width: 325px;
+        height: 325px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #mapsCanvas {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #mapsCanvas {
+        width: 200px;
+        height: 200px;
+    }
 }
